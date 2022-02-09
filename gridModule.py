@@ -36,13 +36,13 @@ class grid(object):
     def drawGrid(self, lineColor=(0,0,0)): #This will draw the lines to create the grid, this is done so by simply creating overlapping boxes
         x = self.startx
         y = self.starty
-        
+
         for i in range(self.cols):
             y = self.starty + self.height
             if i > 0:
                 x += (self.width / self.cols)
-            for j in range(self.rows):
-                y -= self.height / self.rows 
+            for _ in range(self.rows):
+                y -= self.height / self.rows
                 pygame.draw.rect(self.screen, (0,0,0),(x, y, self.width / self.cols, self.height/ self.rows), 1)
 
     def clicked(self, pos): #Return the position in the grid that user clicked on
@@ -206,17 +206,17 @@ class pixel():
         if j > 0 : #Down
             self.neighbors.append(grid[i][j - 1])
 
-            
+
         #Diagonal neighbors  
         if j > 0 and i > 0: #Top Left
             self.neighbors.append(grid[i - 1][j - 1])
 
-        if j + 1 < rows and i > -1 and i - 1 > 0: #Bottom Left
+        if j + 1 < rows and i > -1 and i > 1: #Bottom Left
             self.neighbors.append(grid[i - 1][j + 1])
 
-        if j - 1 < rows and i < cols - 1 and j - 1 > 0: #Top Right
+        if j - 1 < rows and i < cols - 1 and j > 1: #Top Right
             self.neighbors.append(grid[i + 1][j - 1])
-            
+
         if j < rows - 1 and i < cols - 1: #Bottom Right
             self.neighbors.append(grid[i + 1][j + 1])
         
